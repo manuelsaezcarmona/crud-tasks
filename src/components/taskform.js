@@ -1,5 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { GlobalContext } from "../context/global-context";
+
 export function TaskForm() {
+  const { addTask } = useContext(GlobalContext);
+
   const [task, settask] = useState({
     title: "",
     description: "",
@@ -7,7 +11,8 @@ export function TaskForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(task);
+
+    addTask(task);
   }
 
   function handleChange(event) {
@@ -15,7 +20,7 @@ export function TaskForm() {
   }
   const template = (
     <div className="flex justify-center items-center h-3/4">
-      <form action="" className="bg-900 p-10">
+      <form className="bg-900 p-10" onSubmit={handleSubmit}>
         <h2 className="mb-7 text-3x-1">Añadir Tarea</h2>
         <div className="mb-5">
           <input
