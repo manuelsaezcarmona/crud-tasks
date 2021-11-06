@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import addReducer from "./Appreducer";
+import appReducer from "./Appreducer";
 
 const initialState = {
   tasks: [
@@ -26,13 +26,18 @@ const initialState = {
 export const GlobalContext = createContext(initialState);
 
 export const ContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(addReducer, initialState);
+  const [state, dispatch] = useReducer(appReducer, initialState);
 
   const addTask = (task) => {
-    dispatch({ type: "ADD_TASK", payload: { id: 1, title: "nuevo" } });
+    dispatch({ type: "ADD_TASK", payload: task });
   };
+
+  const deleteTask = (task) => {
+    dispatch({ type: "DELETE_TASK" });
+  };
+
   return (
-    <GlobalContext.Provider value={{ ...state, addTask }}>
+    <GlobalContext.Provider value={{ ...state, addTask, deleteTask }}>
       {children}
     </GlobalContext.Provider>
   );

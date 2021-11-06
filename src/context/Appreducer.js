@@ -1,4 +1,4 @@
-export default function addReducer(state, action) {
+export default function appReducer(state, action) {
   console.log(state, action);
   switch (action.type) {
     case "ADD_TASK":
@@ -6,7 +6,9 @@ export default function addReducer(state, action) {
         tasks: [...state.tasks, action.payload],
       };
     case "DELETE_TASK":
-      return "Estoy en delete task.";
+      return {
+        tasks: [],
+      };
 
     default:
       break;
